@@ -57,7 +57,7 @@ namespace accounting_property_source
                 return;
             }
             this.Hide();
-            new EditPropertysForm().Show();
+            new MenuForm().Show();
         }
 
         private void Registration_btn_Click(object sender, System.EventArgs e)
