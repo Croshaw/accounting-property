@@ -1,0 +1,10 @@
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\bin\Debug\accounting-property-source.exe.config
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\bin\Debug\accounting-property-source.exe
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\bin\Debug\accounting-property-source.pdb
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.csproj.AssemblyReference.cache
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.AuthorizationForm.resources
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Properties.Resources.resources
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.csproj.GenerateResource.cache
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.exe
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.pdb
