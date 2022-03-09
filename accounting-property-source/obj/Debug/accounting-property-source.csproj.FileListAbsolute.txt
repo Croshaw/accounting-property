@@ -8,3 +8,4 @@ C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\
 C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.exe
 C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.pdb
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.EditPropertysForm.resources

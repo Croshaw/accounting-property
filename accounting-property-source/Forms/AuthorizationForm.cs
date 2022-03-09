@@ -1,4 +1,7 @@
 ﻿using accounting_property_source.Classes;
+using accounting_property_source.Forms;
+using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace accounting_property_source
@@ -7,6 +10,21 @@ namespace accounting_property_source
     {
         private Users users;
         private ExtraTools extra;
+
+        private void SetConString()
+        {
+            if (!File.Exists("DBmain.mdb"))
+            {
+                if (MessageBox.Show("Не можем обнаружить БД. Выберите путь вручную!", "Внимание", MessageBoxButtons.OKCancel) == DialogResult.Cancel) Environment.Exit(0);
+                else
+                {
+                    OpenFileDialog ofd = new OpenFileDialog();
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                        DataBase.ConnectionString = "provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ofd.FileName;
+                }
+            }
+            else DataBase.ConnectionString = "provider=Microsoft.Jet.OLEDB.4.0;Data Source=DBmain.mdb";
+        }
 
         public AuthorizationForm()
         {
@@ -17,14 +35,10 @@ namespace accounting_property_source
         {
             users = new Users();
             extra = new ExtraTools();
-            if (string.IsNullOrEmpty(DataBase.ConnectionString))
-            {
-                MessageBox.Show("Не можем обнаружить БД. Выберите путь вручную!");
-                OpenFileDialog ofd = new OpenFileDialog();
-                if (ofd.ShowDialog() == DialogResult.OK)
-                    DataBase.ConnectionString = "provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + ofd.FileName;
-            }
-            DataBase.OpenConnection();
+            SetConString();
+            try { DataBase.OpenConnection(); }
+            catch { MessageBox.Show("Не правильный файл"); SetConString(); }
+            this.Activate();
         }
 
         private void AuthorizationForm_FormClosing(object sender, FormClosingEventArgs e) =>
@@ -42,6 +56,8 @@ namespace accounting_property_source
                 MessageBox.Show("Не верные данные!");
                 return;
             }
+            this.Hide();
+            new EditPropertysForm().Show();
         }
 
         private void Registration_btn_Click(object sender, System.EventArgs e)
