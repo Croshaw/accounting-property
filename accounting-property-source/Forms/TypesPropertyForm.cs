@@ -55,6 +55,7 @@ namespace accounting_property_source.Forms
                 if (typePropertys.AddElement(Name_tb.Text) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
+            Name_tb.Clear();
             listBox1.Items.Clear();
             listBox1.Items.AddRange(property.GetTypes().ToArray());
         }
@@ -74,6 +75,7 @@ namespace accounting_property_source.Forms
             if (Edit_cb.Checked == true)
             {
                 Add_btn.Text = "Изменить";
+                if (listBox1.SelectedItem == null) return;
                 Name_tb.Text = listBox1.SelectedItem.ToString();
             }
             else
@@ -85,7 +87,7 @@ namespace accounting_property_source.Forms
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Edit_cb.Checked == true) Name_tb.Text = listBox1.SelectedItem.ToString();
+            if (Edit_cb.Checked == true && listBox1.SelectedItem != null) Name_tb.Text = listBox1.SelectedItem.ToString();
         }
 
         private void TypesPropertyForm_FormClosing(object sender, FormClosingEventArgs e)
