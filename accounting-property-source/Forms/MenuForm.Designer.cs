@@ -30,6 +30,7 @@ namespace accounting_property_source.Forms
         private void InitializeComponent()
         {
             this.Property_btn = new System.Windows.Forms.Button();
+            this.TypesPropForm_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Property_btn
@@ -42,11 +43,22 @@ namespace accounting_property_source.Forms
             this.Property_btn.UseVisualStyleBackColor = true;
             this.Property_btn.Click += new System.EventHandler(this.Property_btn_Click);
             // 
+            // TypesPropForm_btn
+            // 
+            this.TypesPropForm_btn.Location = new System.Drawing.Point(35, 90);
+            this.TypesPropForm_btn.Name = "TypesPropForm_btn";
+            this.TypesPropForm_btn.Size = new System.Drawing.Size(249, 63);
+            this.TypesPropForm_btn.TabIndex = 1;
+            this.TypesPropForm_btn.Text = "Тип имущества";
+            this.TypesPropForm_btn.UseVisualStyleBackColor = true;
+            this.TypesPropForm_btn.Click += new System.EventHandler(this.TypesPropForm_btn_Click);
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(321, 175);
+            this.Controls.Add(this.TypesPropForm_btn);
             this.Controls.Add(this.Property_btn);
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -59,5 +71,6 @@ namespace accounting_property_source.Forms
         #endregion
 
         private System.Windows.Forms.Button Property_btn;
+        private System.Windows.Forms.Button TypesPropForm_btn;
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Classes\DataBase.cs" />
     <Compile Include="Classes\ExtraTools.cs" />
     <Compile Include="Classes\Propertys.cs" />
+    <Compile Include="Classes\TypePropertys.cs" />
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Forms\AuthorizationForm.cs">
       <SubType>Form</SubType>
@@ -61,6 +62,12 @@
     </Compile>
     <Compile Include="Forms\EditPropertysForm.Designer.cs">
       <DependentUpon>EditPropertysForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TypesPropertyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TypesPropertyForm.Designer.cs">
+      <DependentUpon>TypesPropertyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MenuForm.cs">
       <SubType>Form</SubType>
@@ -78,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MenuForm.resx">
       <DependentUpon>MenuForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TypesPropertyForm.resx">
+      <DependentUpon>TypesPropertyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

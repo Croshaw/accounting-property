@@ -8,10 +8,12 @@ namespace accounting_property_source.Forms
     public partial class EditPropertysForm : Form
     {
         private Propertys propertys;
+        Form _owner;
 
-        public EditPropertysForm()
+        public EditPropertysForm(Form _owner)
         {
             InitializeComponent();
+            this._owner = _owner;
         }
 
         private void EditPropertysForm_Load(object sender, EventArgs e)
@@ -83,8 +85,7 @@ namespace accounting_property_source.Forms
 
         private void EditPropertysForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataBase.CloseConnection();
-            Environment.Exit(0);
+            _owner.Show();
         }
     }
 }
