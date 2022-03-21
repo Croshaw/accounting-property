@@ -15,12 +15,10 @@ namespace accounting_property_source.Forms
     {
         Propertys property;
         TypePropertys typePropertys;
-        Form _owner;
 
-        public TypesPropertyForm(Form _owner)
+        public TypesPropertyForm()
         {
             InitializeComponent();
-            this._owner = _owner;
         }
 
         private void TypesPropertyForm_Load(object sender, EventArgs e)
@@ -88,11 +86,6 @@ namespace accounting_property_source.Forms
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Edit_cb.Checked == true && listBox1.SelectedItem != null) Name_tb.Text = listBox1.SelectedItem.ToString();
-        }
-
-        private void TypesPropertyForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            _owner.Show();
         }
     }
 }

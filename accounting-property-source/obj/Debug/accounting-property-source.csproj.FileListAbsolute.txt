@@ -11,3 +11,9 @@ C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\
 C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.EditPropertysForm.resources
 C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.MenuForm.resources
 C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.TypesPropertyForm.resources
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.EditSupplierForm.resources
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.EditSupplyForm.resources
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\bin\Debug\RJCodeAdvance.RJControls.dll
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting-property-source.csproj.CopyComplete
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.EditInvertalForm.resources
+C:\Users\Admin\Desktop\accounting-property\accounting-property-source\obj\Debug\accounting_property_source.Forms.SvodkaForm.resources

@@ -83,5 +83,14 @@ namespace accounting_property_source.Classes
             dbCommand = new OleDbCommand(query, dbConnection);
             return dbCommand.ExecuteNonQuery();
         }
+
+        public static int CountQueryElement(string query)
+        {
+            if (dbConnection == null) throw new ArgumentNullException("Connection cannot be null!");
+            if (query == null) throw new ArgumentNullException("Query cannot be null!");
+
+            dbCommand = new OleDbCommand(query, dbConnection);
+            return Convert.ToInt32(dbCommand.ExecuteScalar());
+        }
     }
 }

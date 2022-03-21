@@ -11,6 +11,7 @@ namespace accounting_property_source
         private Users users;
         private ExtraTools extra;
 
+        public static string UserId = null;
         private void SetConString()
         {
             if (!File.Exists("DBmain.mdb"))
@@ -57,12 +58,14 @@ namespace accounting_property_source
                 return;
             }
             this.Hide();
+            UserId = users.GetUserId(UserName_tb.Text);
             new MenuForm().Show();
         }
 
         private void Registration_btn_Click(object sender, System.EventArgs e)
         {
-            this.Size = new System.Drawing.Size(636, 241);
+            this.Size = new System.Drawing.Size(626, 210);
+            head_label.Text = "Регистрация";
             this.CenterToScreen();
             Login_btn.Visible = false;
             Registration_btn.Visible = false;
@@ -81,16 +84,30 @@ namespace accounting_property_source
                 MessageBox.Show("Такой пользователь уже есть!");
                 return;
             }
-            if (users.AddUser(UserName_tb.Text, Password_tb.Text, Name_tb.Text, SecondName_tb.Text, ThirdName_tb.Text, BirhDate_dtp.Value.ToShortDateString(), "3") == 1)
+            if (users.AddUser(UserName_tb.Text, Password_tb.Text, Name_tb.Text, SecondName_tb.Text, ThirdName_tb.Text, rjDatePicker1.Value.ToShortDateString(), "3") == 1)
+            {
                 MessageBox.Show("Успешно!");
+                UserId = users.GetUserId(UserName_tb.Text);
+            }
             else MessageBox.Show("Что-то пошло не так!");
 
 
-            this.Size = new System.Drawing.Size(233, 235);
+            this.Size = new System.Drawing.Size(220, 210);
+            head_label.Text = "Авторизация";
             this.CenterToScreen();
             Login_btn.Visible = true;
             Registration_btn.Visible = true;
             extra.ClearTB(UserName_tb, Password_tb, Name_tb, SecondName_tb, ThirdName_tb);
+        }
+
+        private void Minimize_btn_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void Exit_btn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
