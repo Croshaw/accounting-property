@@ -40,6 +40,11 @@ namespace accounting_property_source.Forms
             this.Delete_btn = new System.Windows.Forms.Button();
             this.Add_btn = new System.Windows.Forms.Button();
             this.Edit_cb = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ContractFilter_tb = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.OrgFilter_tb = new System.Windows.Forms.TextBox();
+            this.Filter_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +92,7 @@ namespace accounting_property_source.Forms
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(484, 297);
+            this.dataGridView1.Size = new System.Drawing.Size(436, 297);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -178,12 +183,76 @@ namespace accounting_property_source.Forms
             this.Edit_cb.UseVisualStyleBackColor = true;
             this.Edit_cb.CheckedChanged += new System.EventHandler(this.Edit_cb_CheckedChanged);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Coral;
+            this.label3.Location = new System.Drawing.Point(514, 95);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 16);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Договор:";
+            // 
+            // ContractFilter_tb
+            // 
+            this.ContractFilter_tb.BackColor = System.Drawing.Color.LightSalmon;
+            this.ContractFilter_tb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ContractFilter_tb.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ContractFilter_tb.ForeColor = System.Drawing.Color.White;
+            this.ContractFilter_tb.Location = new System.Drawing.Point(517, 113);
+            this.ContractFilter_tb.Name = "ContractFilter_tb";
+            this.ContractFilter_tb.Size = new System.Drawing.Size(226, 22);
+            this.ContractFilter_tb.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.Coral;
+            this.label4.Location = new System.Drawing.Point(514, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(110, 16);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Организация:";
+            // 
+            // OrgFilter_tb
+            // 
+            this.OrgFilter_tb.BackColor = System.Drawing.Color.LightSalmon;
+            this.OrgFilter_tb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.OrgFilter_tb.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.OrgFilter_tb.ForeColor = System.Drawing.Color.White;
+            this.OrgFilter_tb.Location = new System.Drawing.Point(517, 56);
+            this.OrgFilter_tb.Name = "OrgFilter_tb";
+            this.OrgFilter_tb.Size = new System.Drawing.Size(226, 22);
+            this.OrgFilter_tb.TabIndex = 14;
+            // 
+            // Filter_btn
+            // 
+            this.Filter_btn.BackColor = System.Drawing.Color.LightSalmon;
+            this.Filter_btn.FlatAppearance.BorderSize = 0;
+            this.Filter_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Filter_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Filter_btn.ForeColor = System.Drawing.Color.White;
+            this.Filter_btn.Location = new System.Drawing.Point(517, 162);
+            this.Filter_btn.Name = "Filter_btn";
+            this.Filter_btn.Size = new System.Drawing.Size(226, 29);
+            this.Filter_btn.TabIndex = 18;
+            this.Filter_btn.Text = "Фильтрация";
+            this.Filter_btn.UseVisualStyleBackColor = false;
+            this.Filter_btn.Click += new System.EventHandler(this.Filter_btn_Click);
+            // 
             // EditSupplierForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(515, 450);
+            this.ClientSize = new System.Drawing.Size(753, 450);
+            this.Controls.Add(this.Filter_btn);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.ContractFilter_tb);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.OrgFilter_tb);
             this.Controls.Add(this.Edit_cb);
             this.Controls.Add(this.Delete_btn);
             this.Controls.Add(this.Add_btn);
@@ -211,5 +280,10 @@ namespace accounting_property_source.Forms
         private System.Windows.Forms.Button Delete_btn;
         private System.Windows.Forms.Button Add_btn;
         private System.Windows.Forms.CheckBox Edit_cb;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox ContractFilter_tb;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox OrgFilter_tb;
+        private System.Windows.Forms.Button Filter_btn;
     }
 }

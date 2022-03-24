@@ -9,9 +9,21 @@ namespace accounting_property_source.Classes
 {
     class Supply
     {
-        public DataTable GetTable()
+        public DataTable GetTable(string org,string prop, string minDate, string maxDate)
         {
-            return DataBase.GetDataTable($"SELECT Supply.Id, Supplier.Id, Propertys.Id, Supplier.Org as Организация, Propertys.NameProperty as Продукт, Supply.DateSupply as Дата From Supply,Supplier, Propertys WHERE Supplier.Id=Supply.IdSupplier AND Supply.IdPropertys=Propertys.Id");
+            string endQuery = "";
+            if (!string.IsNullOrEmpty(org))
+                endQuery += " AND Supplier.Id = " + org;
+            if (!string.IsNullOrEmpty(prop))
+                endQuery += " AND Propertys.Id = " + prop;
+            if (minDate != null && maxDate != null)
+                endQuery += $" AND Supply.DateSupply BETWEEN #{minDate}# and #{maxDate}#";
+            else
+            if (minDate != null)
+                endQuery += $" AND Supply.DateSupply >= #{minDate}#";
+            else if (maxDate != null)
+                endQuery += $" AND Supply.DateSupply <= #{maxDate}#";
+            return DataBase.GetDataTable($"SELECT Supply.Id, Supplier.Id, Propertys.Id, Supplier.Org as Организация, Propertys.NameProperty as Продукт, Supply.DateSupply as Дата From Supply,Supplier, Propertys WHERE Supplier.Id=Supply.IdSupplier AND Supply.IdPropertys=Propertys.Id{endQuery}");
         }
 
         public int AddElement(params string[] items)

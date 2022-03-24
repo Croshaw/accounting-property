@@ -5,9 +5,18 @@ namespace accounting_property_source.Classes
 {
     class Supplier
     {
-        public DataTable GetTable()
+        public DataTable GetTable(string org, string cont)
         {
-            return DataBase.GetDataTable($"SELECT Id, Org as Организация, Contract as Договор From Supplier");
+            string endQuery = "";
+            if (!string.IsNullOrEmpty(org))
+                endQuery += " WHERE Org LIKE '" + org + "%'";
+            if (!string.IsNullOrEmpty(cont))
+            {
+                if (string.IsNullOrEmpty(org)) endQuery += " WHERE";
+                else endQuery += " AND";
+                endQuery += " Contract LIKE '" + cont + "%'";
+            }
+            return DataBase.GetDataTable($"SELECT Id, Org as Организация, Contract as Договор From Supplier{endQuery}");
         }
 
         public List<string> GetOrg()

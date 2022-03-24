@@ -9,9 +9,14 @@ namespace accounting_property_source.Classes
 {
     class Propertys
     {
-        public DataTable GetTable()
+        public DataTable GetTable(string nameproperty, string idType)
         {
-            return DataBase.GetDataTable($"SELECT Propertys.Id,Propertys.NameProperty as Наименование, Types.NameType as Тип, Propertys.Cost as Стоимость, Users.SecondName as Сотрудник FROM Propertys, Types, Users Where Propertys.IdTypes = Types.Id AND Propertys.IdUsers = Users.Id ");
+            string endQuery="";
+            if (!string.IsNullOrEmpty(nameproperty))
+                endQuery += " AND Propertys.NameProperty LIKE '" + nameproperty+ "%'";
+            if(!string.IsNullOrEmpty(idType))
+                endQuery += " AND Propertys.IdTypes = " + idType;
+            return DataBase.GetDataTable($"SELECT Propertys.Id,Propertys.NameProperty as Наименование, Types.NameType as Тип, Propertys.Cost as Стоимость, Users.SecondName as Сотрудник FROM Propertys, Types, Users Where Propertys.IdTypes = Types.Id AND Propertys.IdUsers = Users.Id{endQuery}");
         }
 
         public List<string> GetTypes()

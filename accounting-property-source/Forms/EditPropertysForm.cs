@@ -8,7 +8,7 @@ namespace accounting_property_source.Forms
     public partial class EditPropertysForm : Form
     {
         private Propertys propertys;
-
+        string filterId;
         public EditPropertysForm()
         {
             InitializeComponent();
@@ -17,9 +17,11 @@ namespace accounting_property_source.Forms
         private void EditPropertysForm_Load(object sender, EventArgs e)
         {
             propertys = new Propertys();
-            dataGridView1.DataSource = propertys.GetTable();
+            dataGridView1.DataSource = propertys.GetTable(null, null);
             dataGridView1.Columns[0].Visible = false;
             Types_cb.Items.AddRange(propertys.GetTypes().ToArray());
+            TypesFilter_cb.Items.Add("Все");
+            TypesFilter_cb.Items.AddRange(propertys.GetTypes().ToArray());
         }
 
         private void Add_btn_Click(object sender, EventArgs e)
@@ -41,7 +43,7 @@ namespace accounting_property_source.Forms
                 if (propertys.AddElement(PropertysName_tb.Text, id, Cost_tb.Text, AuthorizationForm.UserId) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
-            dataGridView1.DataSource = propertys.GetTable();
+            dataGridView1.DataSource = propertys.GetTable(PropertysNameFilter_tb.Text, filterId);
             PropertysName_tb.Clear();
             Types_cb.SelectedIndex = -1;
             Cost_tb.Clear();
@@ -52,7 +54,7 @@ namespace accounting_property_source.Forms
             if (dataGridView1.Rows.Count < 1) return;
             if (propertys.DeleteElement(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
                 MessageBox.Show("Что-то пошло не так!");
-            dataGridView1.DataSource = propertys.GetTable();
+            dataGridView1.DataSource = propertys.GetTable(PropertysNameFilter_tb.Text, filterId);
             PropertysName_tb.Clear();
             Types_cb.SelectedIndex = -1;
             Cost_tb.Clear();
@@ -85,6 +87,18 @@ namespace accounting_property_source.Forms
                 Types_cb.SelectedItem = dataGridView1.Rows[e.RowIndex].Cells[2].Value;
                 Cost_tb.Text = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[3].Value.ToString();
             }
+        }
+
+        private void Filter_btn_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = propertys.GetTable(PropertysNameFilter_tb.Text, filterId);
+        }
+
+        private void TypesFilter_cb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TypesFilter_cb.SelectedIndex != -1 && TypesFilter_cb.SelectedIndex != 0)
+                filterId = propertys.GetIdType(TypesFilter_cb.SelectedItem.ToString());
+            else filterId = "";
         }
     }
 }

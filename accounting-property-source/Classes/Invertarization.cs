@@ -4,9 +4,21 @@ namespace accounting_property_source.Classes
 {
     class Invertarization
     {
-        public DataTable GetTable()
+        public DataTable GetTable(string prop, string status, string minDate, string maxDate)
         {
-            return DataBase.GetDataTable($"SELECT Invertarization.Id, Propertys.NameProperty as Имущество, Invertarization.StatusInv as Статус, Invertarization.DateInvent as Дата FROM Invertarization, Propertys WHERE Propertys.Id = Invertarization.IdProp");
+            string endQuery = "";
+            if (!string.IsNullOrEmpty(prop))
+                endQuery += " AND Invertarization.IdProp = " + prop;
+            if (!string.IsNullOrEmpty(status))
+                endQuery += " AND Invertarization.StatusInv = '" + status+"'";
+            if (minDate != null && maxDate != null)
+                endQuery += $" AND Invertarization.DateInvent BETWEEN #{minDate}# and #{maxDate}#";
+            else
+            if (minDate != null)
+                endQuery += $" AND Invertarization.DateInvent >= #{minDate}#";
+            else if (maxDate != null)
+                endQuery += $" AND Invertarization.DateInvent <= #{maxDate}#";
+            return DataBase.GetDataTable($"SELECT Invertarization.Id, Propertys.NameProperty as Имущество, Invertarization.StatusInv as Статус, Invertarization.DateInvent as Дата FROM Invertarization, Propertys WHERE Propertys.Id = Invertarization.IdProp{endQuery}");
         }
 
         public DataTable GetTableParam(string param)

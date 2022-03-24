@@ -17,6 +17,8 @@ namespace accounting_property_source.Forms
         Supplier supplier;
         Propertys propertys;
         string idProp, idOrg;
+        string minDate, maxDate;
+        string idPropFilter=null, idOrgFilter=null;
 
         public EditSupplyForm()
         {
@@ -28,11 +30,16 @@ namespace accounting_property_source.Forms
             supply = new Supply();
             supplier = new Supplier();
             propertys = new Propertys();
-            dataGridView1.DataSource = supply.GetTable();
+            dataGridView1.DataSource = supply.GetTable(null,null, null, null);
             for (int i = 0; i < 3; i++)
                 dataGridView1.Columns[i].Visible = false;
             Org_cb.Items.AddRange(supplier.GetOrg().ToArray());
             Prop_cb.Items.AddRange(propertys.GetProp().ToArray());
+            OrgFilter_cb.Items.AddRange(supplier.GetOrg().ToArray());
+            PropFilter_cb.Items.AddRange(propertys.GetProp().ToArray());
+
+            this.rjDatePicker2.Format = this.rjDatePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.rjDatePicker2.CustomFormat = this.rjDatePicker3.CustomFormat = " ";
         }
 
         private void Add_btn_Click(object sender, EventArgs e)
@@ -55,7 +62,7 @@ namespace accounting_property_source.Forms
                 if (supply.AddElement(idOrg, idProp, rjDatePicker1.Value.ToShortDateString()) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
-            dataGridView1.DataSource = supply.GetTable();
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
             Org_cb.SelectedIndex = -1;
             Prop_cb.SelectedIndex = -1;
         }
@@ -65,7 +72,7 @@ namespace accounting_property_source.Forms
             if (dataGridView1.Rows.Count < 1) return;
             if (supply.DeleteElement(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
                 MessageBox.Show("Что-то пошло не так!");
-            dataGridView1.DataSource = supply.GetTable();
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
             Org_cb.SelectedIndex = -1;
             Prop_cb.SelectedIndex = -1;
         }
@@ -85,6 +92,50 @@ namespace accounting_property_source.Forms
                 Org_cb.SelectedIndex = -1;
                 Prop_cb.SelectedIndex = -1;
             }
+        }
+
+        private void OrgFilter_cb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (OrgFilter_cb.SelectedIndex != -1)
+                idOrgFilter = supplier.GetId(OrgFilter_cb.SelectedItem.ToString());
+            else idOrgFilter = null;
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
+        }
+
+        private void PropFilter_cb_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PropFilter_cb.SelectedIndex != -1)
+                idPropFilter = propertys.GetId(PropFilter_cb.SelectedItem.ToString());
+            else idPropFilter = null;
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
+        }
+
+        private void ResetOrgFilter_btn_Click(object sender, EventArgs e) => OrgFilter_cb.SelectedIndex = -1;
+
+        private void ResetPropFilter_btn_Click(object sender, EventArgs e) => PropFilter_cb.SelectedIndex = -1;
+
+        private void ResetDateFilt_btn_Click(object sender, EventArgs e)
+        {
+            this.rjDatePicker2.Format = this.rjDatePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.rjDatePicker2.CustomFormat = this.rjDatePicker3.CustomFormat = " ";
+            minDate = maxDate = null;
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
+        }
+
+        private void rjDatePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.rjDatePicker2.Format == DateTimePickerFormat.Custom)
+                this.rjDatePicker2.Format = DateTimePickerFormat.Short;
+            maxDate = rjDatePicker2.Value.ToString("M/d/yyyy").Replace('.','/');
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
+        }
+
+        private void rjDatePicker3_ValueChanged(object sender, EventArgs e)
+        {
+            if (this.rjDatePicker3.Format == DateTimePickerFormat.Custom)
+                this.rjDatePicker3.Format = DateTimePickerFormat.Short;
+            minDate = rjDatePicker3.Value.ToString("M/d/yyyy").Replace('.', '/');
+            dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

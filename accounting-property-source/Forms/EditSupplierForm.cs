@@ -16,7 +16,7 @@ namespace accounting_property_source.Forms
         private void EditSupliesForm_Load(object sender, EventArgs e)
         {
             supplier = new Supplier();
-            dataGridView1.DataSource = supplier.GetTable();
+            dataGridView1.DataSource = supplier.GetTable(null,null);
             dataGridView1.Columns[0].Visible = false;
         }
 
@@ -43,7 +43,7 @@ namespace accounting_property_source.Forms
                 if (supplier.AddElement(Org_tb.Text, Contract_tb.Text) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
-            dataGridView1.DataSource = supplier.GetTable();
+            dataGridView1.DataSource = supplier.GetTable(OrgFilter_tb.Text, ContractFilter_tb.Text);
             Org_tb.Clear();
             Contract_tb.Clear();
         }
@@ -53,7 +53,7 @@ namespace accounting_property_source.Forms
             if (dataGridView1.Rows.Count < 1) return;
             if (supplier.DeleteElement(dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
                 MessageBox.Show("Что-то пошло не так!");
-            dataGridView1.DataSource = supplier.GetTable();
+            dataGridView1.DataSource = supplier.GetTable(OrgFilter_tb.Text, ContractFilter_tb.Text);
             Org_tb.Clear();
             Contract_tb.Clear();
         }
@@ -82,6 +82,11 @@ namespace accounting_property_source.Forms
                 Org_tb.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 Contract_tb.Text = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[2].Value.ToString();
             }
+        }
+
+        private void Filter_btn_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = supplier.GetTable(OrgFilter_tb.Text, ContractFilter_tb.Text);
         }
     }
 }
