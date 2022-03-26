@@ -2,16 +2,26 @@
 using accounting_property_source.Forms;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace accounting_property_source
 {
     public partial class AuthorizationForm : Form
     {
+        //Для того, чтоб двигать форму за заголовок.
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
         private Users users;
         private ExtraTools extra;
 
         public static string UserId = null;
+
+        //Генерируем строку подключения для БД. Тут мы проверяем на наличее БД в корневом каталоге программы. Елси он существует, то мы просто в качестве строки подключения передаём его.
+        //Если его нет, то выводится сообщение о том что БД нет, выберите путь вручную.Открывает диалоговое окно, где надо будет выбрать БД.При выборе: Отмена - программа закрывается; Ок- сгенерирует строку подключения.
         private void SetConString()
         {
             if (!File.Exists("DBmain.mdb"))
@@ -31,7 +41,7 @@ namespace accounting_property_source
         {
             InitializeComponent();
         }
-
+        //Загрузка формы. Создаём экзэмляры классов. Инциализируем строку подключения. Пытаемся открыть Соединение с БД. Если не получается Переинициализируем строку подключения.
         private void AuthorizationForm_Load(object sender, System.EventArgs e)
         {
             users = new Users();
@@ -41,10 +51,11 @@ namespace accounting_property_source
             catch { MessageBox.Show("Не правильный файл"); SetConString(); }
             this.Activate();
         }
-
+        //При закрытии формы, соединение с БД закрывается.
         private void AuthorizationForm_FormClosing(object sender, FormClosingEventArgs e) =>
             DataBase.CloseConnection();
 
+        //Событие клика по кнопке войти.
         private void Login_btn_Click(object sender, System.EventArgs e)
         {
             if(extra.isTBEmptyOrNull(UserName_tb,Password_tb))
@@ -62,6 +73,7 @@ namespace accounting_property_source
             new MenuForm().Show();
         }
 
+        //Событие клика по конпке Регистрация. Меняем размеры формы, для того, чтобы были видны друге TextBox.
         private void Registration_btn_Click(object sender, System.EventArgs e)
         {
             this.Size = new System.Drawing.Size(626, 210);
@@ -72,6 +84,7 @@ namespace accounting_property_source
             extra.ClearTB(UserName_tb, Password_tb, Name_tb, SecondName_tb, ThirdName_tb);
         }
 
+        //Событие клика по кнопке Зарегистрироваться. Идут проверки для добавления нового пользователя в таблицу Users. И при успешном расскаде Форма меняет свой размер на прежний. 
         private void EndReg_btn_Click(object sender, System.EventArgs e)
         {
             if(extra.isTBEmptyOrNull(UserName_tb, Password_tb, Name_tb, SecondName_tb, ThirdName_tb))
@@ -100,14 +113,21 @@ namespace accounting_property_source
             extra.ClearTB(UserName_tb, Password_tb, Name_tb, SecondName_tb, ThirdName_tb);
         }
 
+        //Свернуть форму по нажатию кнопки
         private void Minimize_btn_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
+        //Закрыть форму
         private void Exit_btn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+        //Передвижение формы с зажатой мышкой по экрану.
+        private void header_panel_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(Handle, 0xA1, 0x2, 0);
         }
     }
 }

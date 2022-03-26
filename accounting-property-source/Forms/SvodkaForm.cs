@@ -46,20 +46,21 @@ namespace accounting_property_source.Forms
                 switch (dataGridView1.CurrentRow.Index)
                 {
                     case (0):
-                        dataGridView2.DataSource = invent.GetTableParam("Списана");
+                        dataGridView2.DataSource = invent.GetTable(null,"Списана",null,null);
                         break;
                     case (1):
-                        dataGridView2.DataSource = invent.GetTableParam("Введение в эксплуатацию");
+                        dataGridView2.DataSource = invent.GetTable(null, "Введение в эксплуатацию", null, null);
                         break;
                     case (2):
-                        dataGridView2.DataSource = invent.GetTableParam("Утилизация");
+                        dataGridView2.DataSource = invent.GetTable(null,"Утилизация", null, null);
                         break;
                     case (3):
-                        dataGridView2.DataSource = invent.GetTableParam("Ремонт");
+                        dataGridView2.DataSource = invent.GetTable(null, "Ремонт", null, null);
                         break;
                     default:
                         break;
                 }
+                dataGridView2.Columns[0].Visible = false;
             }
             else
             {

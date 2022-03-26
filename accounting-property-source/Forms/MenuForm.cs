@@ -8,6 +8,7 @@ namespace accounting_property_source.Forms
 {
     public partial class MenuForm : Form
     {
+        //Для того, чтоб двигать форму за заголовок.
         [DllImport("user32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImport("user32.dll")]
@@ -16,6 +17,7 @@ namespace accounting_property_source.Forms
         Button currentBtn;
         Form activeForm;
 
+        //Активируем кнопку. В качестве параметра передаётся sender из событий по нажатию кнопок. Далее идут проверки. В конечном итоге currentBtn присвают sender и далее ей меняют цвет.
         void ActiveButton(object btnSender)
         {
             if(btnSender != null)
@@ -31,6 +33,7 @@ namespace accounting_property_source.Forms
                 }
         }
 
+        //Открывает дочернию форму внутри другой формы. Передаём форму и Sender, активируем кнопку и производим настройку дочерний формы, для корректного отображения.
         void OpenChildForm(Form childForm, object btnSender)
         {
             if(activeForm != null)
@@ -76,6 +79,7 @@ namespace accounting_property_source.Forms
             this.Close();
         }
 
+        //Открываем дочернии формы
         private void types_btn_Click(object sender, EventArgs e)
         {
             OpenChildForm(new TypesPropertyForm(), sender);

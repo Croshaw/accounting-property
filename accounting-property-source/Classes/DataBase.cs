@@ -13,6 +13,7 @@ namespace accounting_property_source.Classes
         private static OleDbDataReader dataReader = null;
         private static string connectionString = null;
 
+        //Строка подключения БД.
         public static string ConnectionString
         {
             get
@@ -25,6 +26,7 @@ namespace accounting_property_source.Classes
             }
         }
 
+        //Открывает соединение с БД
         public static void OpenConnection()
         {
             if (connectionString == null) throw new ArgumentNullException("Connection string cannot be null!");
@@ -32,12 +34,14 @@ namespace accounting_property_source.Classes
             dbConnection.Open();
         }
 
+        //Закрываем соедениение с БД, если оно открыто
         public static void CloseConnection()
         {
             if (dbConnection != null && dbConnection.State == System.Data.ConnectionState.Open)
                 dbConnection.Close();
         }
 
+        //Получаем таблицу из БД по Запросу который мы передаем в качестве параметра
         public static DataTable GetDataTable(string query)
         {
             if (query == null) throw new ArgumentNullException("Query cannot be null!");
@@ -47,6 +51,7 @@ namespace accounting_property_source.Classes
             return ds.Tables[0];
         }
 
+        //Получаем список элементов из БД по запросу, чаще всего используем, чтобы получить 1 элемент. Пример пароль по логину.
         public static List<string> GetDataInList(string query)
         {
             if (dbConnection == null) throw new ArgumentNullException("Connection cannot be null!");
@@ -61,7 +66,7 @@ namespace accounting_property_source.Classes
             dataReader.Close();
             return tempList;
         }
-
+        //Проверка есть ли запись в таблице БД
         public static bool QueryInDataBase(string query)
         {
             if (dbConnection == null) throw new ArgumentNullException("Connection cannot be null!");
@@ -75,6 +80,7 @@ namespace accounting_property_source.Classes
             return result;
         }
 
+        //Для удаления, изменения и добавления элементов в БД
         public static int QueryElement(string query)
         {
             if (dbConnection == null) throw new ArgumentNullException("Connection cannot be null!");
@@ -84,6 +90,7 @@ namespace accounting_property_source.Classes
             return dbCommand.ExecuteNonQuery();
         }
 
+        //Для получение числа записей в таблице, по запросу
         public static int CountQueryElement(string query)
         {
             if (dbConnection == null) throw new ArgumentNullException("Connection cannot be null!");

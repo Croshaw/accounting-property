@@ -54,12 +54,12 @@ namespace accounting_property_source.Forms
             if (Edit_cb.Checked)
             {
                 if (dataGridView1.Rows.Count < 1) { MessageBox.Show("Нечего менять"); return; }
-                if (supply.UpdateElement(idOrg, idProp, rjDatePicker1.Value.ToShortDateString(), dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
+                if (supply.UpdateElement(idOrg, idProp, rjDatePicker1.Value.ToString("M/d/yyyy").Replace('.', '/'), dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
             else
             {
-                if (supply.AddElement(idOrg, idProp, rjDatePicker1.Value.ToShortDateString()) != 1)
+                if (supply.AddElement(idOrg, idProp, rjDatePicker1.Value.ToString("M/d/yyyy").Replace('.', '/')) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
             dataGridView1.DataSource = supply.GetTable(idOrgFilter, idPropFilter, minDate, maxDate);

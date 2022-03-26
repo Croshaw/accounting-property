@@ -229,17 +229,18 @@ namespace accounting_property_source
             this.header_panel.Name = "header_panel";
             this.header_panel.Size = new System.Drawing.Size(220, 32);
             this.header_panel.TabIndex = 15;
+            this.header_panel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.header_panel_MouseDown);
             // 
             // head_label
             // 
             this.head_label.AutoSize = true;
             this.head_label.BackColor = System.Drawing.Color.Transparent;
             this.head_label.Dock = System.Windows.Forms.DockStyle.Left;
-            this.head_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.head_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.head_label.ForeColor = System.Drawing.Color.White;
             this.head_label.Location = new System.Drawing.Point(0, 0);
             this.head_label.Name = "head_label";
-            this.head_label.Size = new System.Drawing.Size(166, 29);
+            this.head_label.Size = new System.Drawing.Size(141, 25);
             this.head_label.TabIndex = 2;
             this.head_label.Text = "Авторизация";
             this.head_label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

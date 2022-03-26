@@ -43,7 +43,7 @@ namespace accounting_property_source.Forms
             if (Edit_cb.Checked)
             {
                 if (dataGridView1.Rows.Count < 1) { MessageBox.Show("Нечего менять"); return; }
-                if (invent.UpdateElement(idProp[Prop_cb.SelectedIndex], Status_cb.SelectedItem.ToString(), rjDatePicker1.Value.ToShortDateString(), dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
+                if (invent.UpdateElement(idProp[Prop_cb.SelectedIndex], Status_cb.SelectedItem.ToString(), rjDatePicker1.Value.ToString("M/d/yyyy").Replace('.', '/'), dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString()) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
             else
@@ -53,7 +53,7 @@ namespace accounting_property_source.Forms
                     MessageBox.Show("Это уже списано!");
                     return;
                 }
-                if (invent.AddElement(idProp[Prop_cb.SelectedIndex], Status_cb.SelectedItem.ToString(), rjDatePicker1.Value.ToShortDateString()) != 1)
+                if (invent.AddElement(idProp[Prop_cb.SelectedIndex], Status_cb.SelectedItem.ToString(), rjDatePicker1.Value.ToString("M/d/yyyy").Replace('.', '/')) != 1)
                     MessageBox.Show("Что-то пошло не так!");
             }
             dataGridView1.DataSource = invent.GetTable(idPropFilter, Status, minDate, maxDate);
@@ -128,7 +128,7 @@ namespace accounting_property_source.Forms
         {
             invent = new Invertarization();
             prop = new Propertys();
-            dataGridView1.DataSource = invent.GetTable(null,null,null,null);
+            dataGridView1.DataSource = invent.GetTable(null, null, null,null);
             dataGridView1.Columns[0].Visible = false;
             Prop_cb.Items.AddRange(prop.GetProp().ToArray());
             PropFilter_cb.Items.AddRange(prop.GetProp().ToArray());
